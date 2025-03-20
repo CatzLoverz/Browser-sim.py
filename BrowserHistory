@@ -27,7 +27,7 @@ print("Selamat datang di browser! \nsearch - untuk mencari situs web \nback - un
 while True:
     Pilihan = input("\nMasukkan pilihan tab anda: ").lower()
     match Pilihan:
-        case "stop":
+        case "stop": #ketik stop untuk menghentikan program
             break
         case "search":
             url = input("Masukkan URL: ")
