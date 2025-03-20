@@ -1,0 +1,45 @@
+#Browser history menggunakan stack
+
+class BrowserHistory:
+    def __init__(self):
+        self.back_stack =  []
+        self.forward_stack = []
+        self.current_page = None
+
+    def visit(self, url):
+        if self.current_page:
+            self.back_stack.append(self.current_page)  # Simpan halaman sebelumnya
+        self.current_page = url
+        self.forward_stack.clear()  # Hapus forward saat ada kunjungan baru
+
+    def back(self):
+        if self.back_stack:
+            self.forward_stack.append(self.current_page)
+            self.current_page = self.back_stack.pop()
+
+    def forward(self):
+        if self.forward_stack:
+            self.back_stack.append(self.current_page)
+            self.current_page = self.forward_stack.pop()
+
+Browser = BrowserHistory()
+print("Selamat datang di browser! \nsearch - untuk mencari situs web \nback - untuk kembali pada tab sebelumnya \nforward - untuk maju ke tab selanjutnya \ncurrent - untuk melihat nama tab yang sedang berlanjut \nstop - untuk stop")
+while True:
+    Pilihan = input("\nMasukkan pilihan tab anda: ").lower()
+    match Pilihan:
+        case "stop":
+            break
+        case "search":
+            url = input("Masukkan URL: ")
+            Browser.visit(url)
+            print(f"Tab anda saat ini adalah: {Browser.current_page}")
+        case "current":
+            print(f"Tab anda saat ini adalah: {Browser.current_page}")
+        case "forward":
+            Browser.forward()
+            print(f"Tab anda saat ini adalah: {Browser.current_page}")
+        case "back":
+            Browser.back()
+            print(f"Tab anda saat ini adalah: {Browser.current_page}")
+        case _:
+            print("Perintah tidak dikenali")
